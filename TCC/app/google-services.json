@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "753797455530",
+    "firebase_url": "https://userauth-75437.firebaseio.com",
+    "project_id": "userauth-75437",
+    "storage_bucket": "userauth-75437.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753797455530:android:f58993ae18c25c6c",
+        "android_client_info": {
+          "package_name": "com.evandro.tcc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753797455530-d6r9k2vr113r1689oe78h3nl2rtkkn0j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbq1UFnn4m7SMmikQlhvfhDkj2oJx5aws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "753797455530-d6r9k2vr113r1689oe78h3nl2rtkkn0j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

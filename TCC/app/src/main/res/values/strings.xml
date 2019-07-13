@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">TCC</string>
+    <string name="account_Name">ACCOUNT NAME</string>
+    <string name="password">PASSWORD</string>
+    <string name="password_Hint">**********</string>
+    <string name="forgot_Your_Login_info">FORGOT YOUR LOGIN INFO</string>
+    <string name="sign_In">SIGN IN</string>
+    <string name="remember_My_Password">REMEMBER PASSWORD</string>
+    <string name="username">USERNAME</string>
+    <string name="create_Account">CREATE ACCOUNT</string>
+    <string name="first_Name">FIRST NAME</string>
+    <string name="last_Name">LAST NAME</string>
+    <string name="email">EMAIL</string>
+    <string name="create_Account2">CREATE ACCOUNT</string>
+    <string name="email_Hint">TESTE@EXAMPLE.COM</string>
+</resources>
