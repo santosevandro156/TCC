@@ -1,5 +1,6 @@
 package com.evandro.tcc
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -7,7 +8,7 @@ import android.support.v4.content.ContextCompat
 import android.view.Window
 import android.view.WindowManager
 import android.os.Build
-
+import android.view.View
 
 
 class LoginActivity : AppCompatActivity() {
@@ -28,4 +29,6 @@ class LoginActivity : AppCompatActivity() {
         this.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         this.statusBarColor = ContextCompat.getColor(baseContext, color)
     }
+
+
 }
