@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="@string/account_Name"/>
+                android:text="@string/email"/>
 
         <EditText
                 android:id="@+id/et_email"
@@ -36,7 +36,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/colorAccent"
                 android:textColorHint="#8C8C96"
-                android:hint="@string/username"/>
+                android:hint="@string/email_Hint"/>
 
         <TextView
                 android:layout_width="wrap_content"
