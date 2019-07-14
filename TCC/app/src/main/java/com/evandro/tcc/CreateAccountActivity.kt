@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -16,12 +17,12 @@ import com.google.firebase.database.FirebaseDatabase
 
 class CreateAccountActivity : AppCompatActivity() {
 
-    //Login element declaration
+    //Create element declaration
     private var etFirstName: EditText? = null
     private var etLastName: EditText? = null
     private var etEmail: EditText? = null
     private var etPassword: EditText? = null
-    private var btnRegister:Button? = null
+    private var btnRegister: Button? = null
     private var mProgressBar: ProgressDialog? = null
 
     //Database References
@@ -53,10 +54,11 @@ class CreateAccountActivity : AppCompatActivity() {
         etEmail = findViewById<View>(R.id.et_email) as EditText
         etPassword = findViewById<View>(R.id.et_password) as EditText
         btnRegister = findViewById<View>(R.id.btn_Register) as Button
+        mProgressBar = ProgressDialog(this)
 
         //Database Instances
-        mDatabaseReference  = mDatabase!!.reference!!.child("Users")
         mDatabase           = FirebaseDatabase.getInstance()
+        mDatabaseReference  = mDatabase!!.reference!!.child("Users")
         mAuth               = FirebaseAuth.getInstance()
 
         //Action for button create account
@@ -74,42 +76,41 @@ class CreateAccountActivity : AppCompatActivity() {
 
         //Verify if variables are empty
         if (!TextUtils.isEmpty(firstName) && !TextUtils.isEmpty(lastName) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
+            //Show progress
+            mProgressBar!!.setMessage("Registering user")
+            mProgressBar!!.show()
 
+            //Input information in database
+            mAuth!!
+                .createUserWithEmailAndPassword(email!!,password!!)
+                .addOnCompleteListener(this){ task ->
+                    mProgressBar!!.hide()
+                    if (task.isSuccessful){
+                        Log.d(TAG,"CreateUserWithEmail:Success")
+
+                        val userId = mAuth!!.currentUser!!.uid
+
+                        //Call function: user email verification
+                        verifyEmail()
+
+                        val currentUserDb = mDatabaseReference!!.child(userId)
+                        currentUserDb.child("firstName").setValue(firstName)
+                        currentUserDb.child("lastName").setValue(lastName)
+
+                        //Call function: update information in database
+                        updateUserAndInfoId()
+                    }else{
+                        Log.w(TAG,"CreateUserWithEmail:Failure",task.exception)
+                        Toast.makeText(this@CreateAccountActivity,"Authentication Failure",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
         }else{
             Toast.makeText(this,"Fill all the information", Toast.LENGTH_SHORT).show()
         }
-
-        //Show progress
-        mProgressBar!!.setMessage("Registering user")
-        mProgressBar!!.show()
-
-        //Input information in database
-        mAuth!!
-            .createUserWithEmailAndPassword(email!!,password!!)
-            .addOnCompleteListener(this){ task ->
-            mProgressBar!!.hide()
-            if (task.isSuccessful){
-                Log.d(TAG,"CreateUserWithEmail:Success")
-
-                    val userId = mAuth!!.currentUser!!.uid
-
-                //Call function: user email verification
-                verifyEmail()
-
-                val currentUserDb = mDatabaseReference!!.child(userId)
-                currentUserDb.child("firstName").setValue(firstName)
-                currentUserDb.child("lastName").setValue(lastName)
-
-                //Call function: update information in database
-                updateUserAndInfoId()
-            }else{
-                Log.w(TAG,"CreateUserWithEmail:Failure",task.exception)
-                Toast.makeText(this@CreateAccountActivity,"Authentication Failure",
-                    Toast.LENGTH_SHORT).show()
-            }
-        }
     }
 
+    //Function send verification email
     private fun verifyEmail(){
         val mUser = mAuth!!.currentUser;
         mUser!!.sendEmailVerification()
@@ -132,6 +133,5 @@ class CreateAccountActivity : AppCompatActivity() {
         val intent = Intent(this@CreateAccountActivity, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
-
     }
 }

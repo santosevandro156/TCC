@@ -10,7 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:orientation="vertical"
-            tools:context="br.com.fake.steam.LoginActivity">
+            tools:context="br.com.fake.steam.CreateAccountActivity">
 
 
         <EditText
@@ -22,15 +22,14 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:textAlignment="center"
-                android:textColor="@color/colorAccent"
-                android:textColorHint="#8C8C96"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorAccent"
                 android:hint="@string/first_Name"/>
 
         <EditText
                 android:id="@+id/et_Last_Name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:inputType="textPassword"
                 android:background="@drawable/login_edittext_bg"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="50dp"
@@ -44,7 +43,6 @@
                 android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:inputType="textPassword"
                 android:background="@drawable/login_edittext_bg"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="50dp"
@@ -78,7 +76,8 @@
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_marginTop="20dp"
                 android:layout_marginLeft="70dp"
-                android:layout_marginRight="70dp"/>
+                android:layout_marginRight="70dp"
+                android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
 

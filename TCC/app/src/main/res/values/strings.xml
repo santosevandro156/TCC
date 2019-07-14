@@ -13,4 +13,5 @@
     <string name="email">EMAIL</string>
     <string name="create_Account2">CREATE ACCOUNT</string>
     <string name="email_Hint">TESTE@EXAMPLE.COM</string>
+    <string name="reset_password">SEND RECUPERATION EMAIL</string>
 </resources>

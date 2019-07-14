@@ -26,10 +26,10 @@ class LoginActivity : AppCompatActivity() {
 
     //Login element declaration
     private var tvForgotPassword: TextView? = null
-    private var etEmail: TextView? = null
-    private var etPassword: TextView? = null
-    private var btnLogin: TextView? = null
-    private var btnCreateAccount: TextView? = null
+    private var etEmail: EditText? = null
+    private var etPassword: EditText? = null
+    private var btnLogin: Button? = null
+    private var btnCreateAccount: Button? = null
     private var mProgressBar: ProgressDialog? = null
 
     //Database References
@@ -52,13 +52,12 @@ class LoginActivity : AppCompatActivity() {
         initialise()
     }
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    fun Window.setStatusBarColorTo(color: Int){
-        this.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-
-        this.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        this.statusBarColor = ContextCompat.getColor(baseContext, color)
-    }
+        @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+        fun Window.setStatusBarColorTo(color: Int){
+            this.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            this.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            this.statusBarColor = ContextCompat.getColor(baseContext, color)
+        }
 
     private fun initialise(){
         //Find Values for variables
@@ -70,31 +69,38 @@ class LoginActivity : AppCompatActivity() {
         mProgressBar = ProgressDialog(this)
 
         //Database Instances
-        mAuth               = FirebaseAuth.getInstance()
+        mAuth   = FirebaseAuth.getInstance()
 
+        //Action for forgot password
         tvForgotPassword!!
             .setOnClickListener{ startActivity(Intent(this@LoginActivity,
-                ForgotPasswordActivity::class.java))}
+                ForgotPasswordActivity::class.java)) }
 
+        //Action for create account
         btnCreateAccount!!
-            .setOnClickListener{startActivity(Intent(this@LoginActivity,
-                CreateAccountActivity::class.java))}
+            .setOnClickListener{ startActivity(Intent(this@LoginActivity,
+                CreateAccountActivity::class.java)) }
 
+        //Action for login
         btnLogin!!.setOnClickListener { loginUser() }
     }
 
     private fun loginUser(){
-        email = etEmail!!.text.toString()
-        password = etPassword!!.text.toString()
 
-        if(!TextUtils.isEmpty(email) || !TextUtils.isEmpty(password)){
+        //Convert variables to string
+        email = etEmail?.text.toString()
+        password = etPassword?.text.toString()
+
+        //Verify if variables are empty
+        if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)){
             mProgressBar!!.setMessage("Checking User")
             mProgressBar!!.show()
 
             Log.d(TAG, "UserLogin")
 
-            mAuth!!.signInWithEmailAndPassword(email!!,password!!).addOnCompleteListener(this){
-                task ->
+            //Sign in database
+            mAuth!!.signInWithEmailAndPassword(email!!,password!!)
+                .addOnCompleteListener(this){ task ->
 
                 mProgressBar!!.hide()
 
@@ -113,6 +119,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    //Directs user for main activity after insert information in database
     private fun updateUI(){
         val intent = Intent(this@LoginActivity, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
